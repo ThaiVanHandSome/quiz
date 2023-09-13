@@ -1,5 +1,11 @@
+import { FormikUseField } from './Formik';
+
 function App() {
-    return <h1>PROJECT</h1>;
+    return (
+        <div className="main">
+            <FormikUseField />
+        </div>
+    );
 }
 
 export default App;
