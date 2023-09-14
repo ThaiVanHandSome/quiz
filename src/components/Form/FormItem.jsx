@@ -1,6 +1,7 @@
 import { useField } from 'formik';
 import classNames from 'classnames/bind';
 import styles from './FormItem.module.scss';
+import { CheckIcon } from './FormIcon';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,19 @@ export const MyTextInp = ({ label, ...props }) => {
     );
 };
 
+export const MyPassword = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    return (
+        <div className={cx('form-item')}>
+            <label htmlFor={props.id || props.name} className={cx('form-item-title')}>
+                {label}
+            </label>
+            <input type="password" {...field} {...props} className={cx('form-item-inp')} />
+            {meta.touched && meta.error ? <div className={cx('error')}>{meta.error}</div> : null}
+        </div>
+    );
+};
+
 export const MyCheckBox = ({ children, ...props }) => {
     props = {
         ...props,
@@ -28,7 +42,9 @@ export const MyCheckBox = ({ children, ...props }) => {
             <div className={cx('checkbox-container')}>
                 <div className={cx('checkbox')}>
                     <input {...field} {...props} className={cx('checkbox-inp')} />
-                    <div className={cx('checkbox-checked')}></div>
+                    <div className={cx('checkbox-checked')}>
+                        <CheckIcon />
+                    </div>
                 </div>
                 <label className={cx('checkbox-title')}>{children}</label>
             </div>
