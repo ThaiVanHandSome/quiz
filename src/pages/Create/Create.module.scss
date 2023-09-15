@@ -1,0 +1,63 @@
+.wrapper {
+    padding: 16px;
+    background: #70e1f5; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffd194, #70e1f5); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ffd194,
+        #70e1f5
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.title {
+    font-size: 6rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 1.4px;
+    text-align: center;
+
+    background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 6s linear infinite;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.quiz-info {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-info-container {
+    display: flex;
+    align-items: center;
+}
+
+.quiz-name-label {
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-style: italic;
+    margin-right: 24px;
+}
+
+.quiz-name-inp {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-width: 300px;
+    color: blue;
+}

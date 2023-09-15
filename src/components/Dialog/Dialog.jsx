@@ -4,11 +4,11 @@ import styles from './Dialog.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Dialog({ setOpen }) {
+function Dialog({ setOpen, message }) {
     return (
         <>
             <Modal isOpen={true} toggle={() => setOpen(false)}>
-                <ModalHeader className={cx('modal-header')}>Bạn đã nhập sai tài khoản hoặc mật khẩu. Vui lòng nhập lại!</ModalHeader>
+                <ModalHeader className={cx('modal-header')}>{message}</ModalHeader>
                 {/* <ModalBody>Modal body</ModalBody> */}
             </Modal>
         </>

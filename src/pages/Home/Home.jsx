@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.scss';
 import { Button } from 'reactstrap';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -22,10 +23,10 @@ function Home() {
                 <li></li>
             </ul>
             <div className={cx('container')}>
-                <Button tag="Link" to="/cc" className={cx('btn')} color="warning" size="lg">
+                <Button tag={Link} to={routes.create} className={cx('btn')} color="warning" size="lg">
                     CREATE
                 </Button>
-                <Button className={cx('btn')} color="danger" size="lg">
+                <Button tag={Link} to={routes.view} className={cx('btn')} color="danger" size="lg">
                     VIEW
                 </Button>
             </div>
