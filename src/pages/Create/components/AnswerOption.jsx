@@ -4,7 +4,7 @@ import styles from './QuizQuestion.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AnswerOption({ bgColor = 'transparent', setOption, value }) {
+function AnswerOption({ bgColor = 'transparent', setOption, value, charac, correct, setCorrect }) {
     return (
         <div className={cx('answer-item')} style={{ backgroundColor: bgColor }}>
             <textarea
@@ -15,6 +15,14 @@ function AnswerOption({ bgColor = 'transparent', setOption, value }) {
                 cols="50"
                 onChange={(e) => setOption(e.target.value)}
             />
+            <div
+                className={cx('btn-correct', {
+                    active: correct === charac,
+                })}
+                onClick={() => setCorrect(charac)}
+            >
+                C
+            </div>
         </div>
     );
 }

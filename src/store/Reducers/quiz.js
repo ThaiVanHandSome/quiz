@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = {};
+const initialValue = JSON.parse(localStorage.getItem('quiz')) || {};
 
 const quizSlice = createSlice({
     name: 'quiz',
@@ -14,6 +14,7 @@ const quizSlice = createSlice({
                     state[name] = [];
                 }
                 state[name].push(action.payload.data);
+                localStorage.setItem('quiz', JSON.stringify(state));
                 // return newState;
             },
             prepare: (quizData) => {
@@ -23,7 +24,7 @@ const quizSlice = createSlice({
                         data: {
                             question: quizData.question,
                             options: [quizData.optionA, quizData.optionB, quizData.optionC, quizData.optionD],
-                            correctOption: null,
+                            correctOption: quizData.correctOption,
                         },
                     },
                 };
@@ -34,6 +35,7 @@ const quizSlice = createSlice({
                 console.log(action.payload);
                 const name = action.payload.name;
                 state[name][action.payload.indexChange] = action.payload.data;
+                localStorage.setItem('quiz', JSON.stringify(state));
                 // return newState;
             },
             prepare: (quizData) => {
@@ -44,7 +46,7 @@ const quizSlice = createSlice({
                         data: {
                             question: quizData.question,
                             options: [quizData.optionA, quizData.optionB, quizData.optionC, quizData.optionD],
-                            correctOption: null,
+                            correctOption: quizData.correctOption,
                         },
                     },
                 };

@@ -1,5 +1,6 @@
 .wrapper {
     padding: 16px;
+    height: 100vh;
     background: #70e1f5; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #ffd194, #70e1f5); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
@@ -60,4 +61,14 @@
     font-weight: 600;
     min-width: 300px;
     color: blue;
+
+    &.disable {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+.alert {
+    display: block !important;
 }

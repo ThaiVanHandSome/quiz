@@ -20,6 +20,8 @@ function QuizQuestion({ quizName }) {
     const [optionC, setOptionC] = useState('');
     const [optionD, setOptionD] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
+    const [correct, setCorrect] = useState(null);
+
     const quizData = {
         quizName,
         question,
@@ -27,6 +29,7 @@ function QuizQuestion({ quizName }) {
         optionB,
         optionC,
         optionD,
+        correctOption: correct,
     };
 
     const handleClear = () => {
@@ -36,6 +39,7 @@ function QuizQuestion({ quizName }) {
         setOptionB('');
         setOptionC('');
         setOptionD('');
+        setCorrect(null);
     };
 
     const handleAdd = () => {
@@ -56,6 +60,7 @@ function QuizQuestion({ quizName }) {
         setOptionB(quiz[quizName][index - 1].options[1]);
         setOptionC(quiz[quizName][index - 1].options[2]);
         setOptionD(quiz[quizName][index - 1].options[3]);
+        setCorrect(quiz[quizName][index - 1].correctOption);
     };
 
     return (
@@ -78,10 +83,38 @@ function QuizQuestion({ quizName }) {
                             let charac = 'A' + index;
                             return <AnswerOption bgColor={item} charac={charac} />;
                         })} */}
-                        <AnswerOption bgColor="blue" setOption={setOptionA} value={optionA} />
-                        <AnswerOption bgColor="green" setOption={setOptionB} value={optionB} />
-                        <AnswerOption bgColor="yellow" setOption={setOptionC} value={optionC} />
-                        <AnswerOption bgColor="pink" setOption={setOptionD} value={optionD} />
+                        <AnswerOption
+                            bgColor="blue"
+                            setOption={setOptionA}
+                            value={optionA}
+                            charac="A"
+                            correct={correct}
+                            setCorrect={setCorrect}
+                        />
+                        <AnswerOption
+                            bgColor="green"
+                            setOption={setOptionB}
+                            value={optionB}
+                            charac="B"
+                            correct={correct}
+                            setCorrect={setCorrect}
+                        />
+                        <AnswerOption
+                            bgColor="yellow"
+                            setOption={setOptionC}
+                            value={optionC}
+                            charac="C"
+                            correct={correct}
+                            setCorrect={setCorrect}
+                        />
+                        <AnswerOption
+                            bgColor="pink"
+                            setOption={setOptionD}
+                            value={optionD}
+                            charac="D"
+                            correct={correct}
+                            setCorrect={setCorrect}
+                        />
                     </div>
                 </div>
             </div>
