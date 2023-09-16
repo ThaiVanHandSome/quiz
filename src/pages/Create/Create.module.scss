@@ -35,6 +35,7 @@
 }
 
 .quiz-info {
+    position: relative;
     margin-top: 32px;
     display: flex;
     align-items: center;
@@ -69,6 +70,120 @@
     }
 }
 
+.choose-btn {
+    min-width: 120px;
+    padding: 12px 0;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    margin-left: 24px;
+}
+
 .alert {
-    display: block !important;
+    margin-left: 24px !important;
+    position: absolute !important;
+    left: 38%;
+    top: 105%;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.create-quiz-container {
+    width: 100%;
+    margin-top: 36px;
+    padding: 0 12px;
+    display: flex;
+    height: 500px;
+    min-height: 500px;
+}
+
+.container-left {
+    width: 70%;
+    height: 100%;
+}
+
+.container-right {
+    flex: 1;
+    margin-left: 24px;
+}
+
+.cnt-question {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+}
+
+.cnt-question-title {
+    font-size: 2rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.cnt-question-container {
+    flex: 1;
+    border: 2px solid red;
+    border-radius: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 6px;
+}
+
+.cnt-question-item {
+    --size: 28px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: red;
+    color: #fff;
+    margin: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.list-btn {
+    margin-top: 48px;
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn {
+    min-width: 150px;
+    padding: 12px !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px;
+}
+
+.btn-correct {
+    --size: 22px;
+    width: var(--size);
+    height: var(--size);
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &.active {
+        background-color: red;
+        color: white;
+    }
 }

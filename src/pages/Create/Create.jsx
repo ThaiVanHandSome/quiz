@@ -1,11 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './Create.module.scss';
-import QuizQuestion from './components/QuizQuestion';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useDebounce from '~/hooks/useDebounce';
 import { Alert, Button } from 'reactstrap';
-
+import CreateQuiz from './CreateQuiz';
 const cx = classNames.bind(styles);
 
 function Create() {
@@ -46,17 +45,17 @@ function Create() {
                         type="text"
                         onChange={(e) => setQuizName(e.target.value)}
                     />
-                    <Button disabled={!checkName} color="primary" size="lg" onClick={handleApply}>
+                    <Button className={cx('choose-btn')} disabled={!checkName} color="primary" size="lg" onClick={handleApply}>
                         Choose
                     </Button>
                 </div>
                 {!checkName && !apply && (
-                    <Alert className={'alert'} color="danger">
+                    <Alert className={cx('alert')} color="danger">
                         You must enter another quiz name!
                     </Alert>
                 )}
             </div>
-            {apply && <QuizQuestion quizName={quizName} />}
+            {apply && <CreateQuiz quizName={quizName} />}
         </div>
     );
 }
