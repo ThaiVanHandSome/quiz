@@ -106,6 +106,15 @@
     margin-left: 24px;
 }
 
+.curr-question {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-style: italic;
+    display: inline-block;
+    padding: 4px 12px;
+    color: #470808;
+}
+
 .cnt-question {
     display: flex;
     flex-direction: column;
@@ -137,19 +146,23 @@
     height: var(--size);
     border-radius: 50%;
     cursor: pointer;
-    background-color: red;
+    background-color: blue;
     color: #fff;
     margin: 0 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
+
+    &.question-active {
+        background-color: red;
+    }
 }
 
 .list-btn {
     margin-top: 48px;
     width: 100%;
-    height: 160px;
+    min-height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,11 +170,46 @@
 }
 
 .btn {
-    min-width: 150px;
+    appearance: none;
+    background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+        rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    list-style: none;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    transition: box-shadow 0.15s, transform 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+
+    &:focus {
+        box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+            #3c4fe0 0 -3px 0 inset;
+    }
+
+    &:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: #3c4fe0 0 3px 7px inset;
+        transform: translateY(2px);
+    }
+    display: inline-block !important;
+    min-width: 160px !important;
     padding: 12px !important;
     font-size: 1.8rem !important;
     font-weight: 700 !important;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
 }
 
 .btn-correct {

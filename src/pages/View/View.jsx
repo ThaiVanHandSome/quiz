@@ -1,9 +1,8 @@
-import classNames from 'classnames/bind';
-import styles from './View.module.scss';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import QuizItem from './QuizItem';
-
+import classNames from 'classnames/bind';
+import styles from './View.module.scss';
+import QuizQuestionView from './QuizQuestionView';
 const cx = classNames.bind(styles);
 
 function View() {
@@ -19,23 +18,16 @@ function View() {
             <h1 className={cx('title')}>VIEW QUIZ</h1>
             <div className={cx('container')}>
                 <div className={cx('container-left')}>
-                    <div className={cx('container-quiz')}>
+                    <div className={cx('quiz-name-label')}> Your Quiz</div>
+                    <div className={cx('quiz-container')}>
                         {Object.keys(quiz).map((quizItem, index) => (
-                            <div key={index} className={cx('quiz-container')} onClick={() => handleSetQuiz(quizItem)}>
+                            <div key={index} className={cx('quiz-name')} onClick={() => handleSetQuiz(quizItem)}>
                                 {quizItem}
                             </div>
                         ))}
                     </div>
                 </div>
-                <div className={cx('container-right')}>
-                    {quizChoosen && (
-                        <div className={cx('show-quiz')}>
-                            {quiz[quizChoosen].map((item, index) => (
-                                <QuizItem data={item} />
-                            ))}
-                        </div>
-                    )}
-                </div>
+                {quizChoosen && <QuizQuestionView data={quiz[quizChoosen]} />}
             </div>
         </div>
     );

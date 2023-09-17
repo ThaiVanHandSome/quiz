@@ -15,15 +15,31 @@ function CreateQuiz({ quizName }) {
     const [add, setAdd] = useState(false);
     const [change, setChange] = useState(false);
     const [clear, setClear] = useState(false);
+    const [currQuestion, setCurrQuestion] = useState(1);
+
+    const handleAdd = () => {
+        setAdd(true);
+        setCurrQuestion(currQuestion + 1);
+    };
+
+    const handleShowQuestion = (index) => {
+        setQuestionShow(index);
+        setCurrQuestion(index);
+    };
 
     const handleClear = () => {
         setClear(true);
         setQuestionShow(0);
+        setCurrQuestion(!quiz[quizName] ? 1 : quiz[quizName].length + 1);
     };
     return (
         <div className={cx('create-quiz-container')}>
             {openDialog && <Dialog isOpen={openDialog} setOpen={setOpenDialog} message="Bạn đã thay đổi thành công" />}
             <div className={cx('container-left')}>
+                <div className={cx('curr-question')}>
+                    Câu hỏi
+                    <span> {currQuestion}</span>
+                </div>
                 <QuizQuestion
                     isAdd={add}
                     setAdd={setAdd}
@@ -43,8 +59,10 @@ function CreateQuiz({ quizName }) {
                             quiz[quizName].map((item, index) => (
                                 <div
                                     key={index}
-                                    className={cx('cnt-question-item')}
-                                    onClick={() => setQuestionShow(index + 1)}
+                                    className={cx('cnt-question-item', {
+                                        "question-active": questionShow === index + 1,
+                                    })}
+                                    onClick={() => handleShowQuestion(index + 1)}
                                 >
                                     {index + 1}
                                 </div>
@@ -52,7 +70,7 @@ function CreateQuiz({ quizName }) {
                     </div>
                 </div>
                 <div className={cx('list-btn')}>
-                    <Button disabled={questionShow} color="primary" onClick={() => setAdd(true)} className={cx('btn')}>
+                    <Button disabled={questionShow} color="primary" onClick={handleAdd} className={cx('btn')}>
                         Add
                     </Button>
                     <Button

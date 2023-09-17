@@ -5,10 +5,10 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function QuizOption({ bgColor, isInp, value, setValueOption, isCorrectOption, handleSetCorrectOption }) {
+function QuizOption({ data, bgColor, isInp, value, setValueOption, isCorrectOption, handleSetCorrectOption }) {
     return (
         <div className={cx('quiz-option')} style={{ backgroundColor: bgColor }}>
-            {!isInp && <div className={cx('quiz-option-label')}>Test thoi nha</div>}
+            {!isInp && <div className={cx('quiz-option-label')}>{data}</div>}
             {isInp && (
                 <textarea
                     value={value}
@@ -22,7 +22,7 @@ function QuizOption({ bgColor, isInp, value, setValueOption, isCorrectOption, ha
                 className={cx('btn-correct', {
                     active: isCorrectOption,
                 })}
-                onClick={handleSetCorrectOption}
+                onClick={!isInp ? () => {} : handleSetCorrectOption}
             >
                 <FontAwesomeIcon icon={faCheck} />
             </div>

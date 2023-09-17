@@ -9,17 +9,18 @@ import QuizOption from './QuizOption';
 const cx = classNames.bind(styles);
 
 const bgVal = ['yellow', 'green', 'pink', 'blue'];
+const defaultFunc = () => {};
 function QuizQuestion({
     data = {},
     isInp = true,
     quizName,
     indexQuestion = 0,
     isAdd,
-    setAdd,
+    setAdd = defaultFunc,
     isChange,
-    setChange,
+    setChange = defaultFunc,
     isClear,
-    setClear,
+    setClear = defaultFunc,
 }) {
     const quiz = useSelector((state) => state.quizReducer);
     const dispatch = useDispatch();
@@ -114,6 +115,7 @@ function QuizQuestion({
                     if (!isInp) valOption = data.options[index];
                     return (
                         <QuizOption
+                            data={!isInp && data.options[index]}
                             bgColor={bgColor}
                             isInp={isInp}
                             value={valOption}
