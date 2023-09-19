@@ -48,6 +48,23 @@
     margin: 0 8px;
     border-radius: 12px;
     position: relative;
+    transition: all 0.3s;
+
+    &.choosen {
+        background-color: #fe2c55 !important;
+    }
+
+    &.not-choosen {
+        opacity: 0.2;
+    }
+
+    &.answer-true {
+        background-color: #7fff00 !important;
+    }
+
+    &.answer-false {
+        background-color: red !important;
+    }
 }
 
 .quiz-option-label,
@@ -81,7 +98,7 @@
     cursor: pointer;
 
     &.active {
-        background-color: #7FFF00;
+        background-color: #7fff00;
         color: white;
     }
 }

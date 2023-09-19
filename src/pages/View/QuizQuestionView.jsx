@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './View.module.scss';
 import QuizQuestion from '~/components/QuizQuestion';
+import { Button } from 'reactstrap';
 
 const cx = classNames.bind(styles);
 
-function QuizQuestionView({ data }) {
+function QuizQuestionView({ data, quizName, setPlaying }) {
     const ref = useRef(null);
     useEffect(() => {
         ref.current.scrollIntoView(true);
@@ -13,9 +14,18 @@ function QuizQuestionView({ data }) {
 
     return (
         <div ref={ref} className={cx('container-right')}>
-            <div className={cx('cnt-question')}>
-                Số lượng câu hỏi:
-                <span> {data.length}</span>
+            <div className={cx('question-header')}>
+                <div className={cx('question-header-name')}>
+                    Quiz:
+                    <span> {quizName}</span>
+                </div>
+                <Button color="warning" className={cx('play-btn')} onClick={() => setPlaying(true)}>
+                    Play
+                </Button>
+                <div className={cx('cnt-question')}>
+                    Số lượng câu hỏi:
+                    <span> {data.length}</span>
+                </div>
             </div>
             <div className={cx('list-questions-container')}>
                 <div className={cx('list-questions')}>
@@ -25,6 +35,7 @@ function QuizQuestionView({ data }) {
                                 Câu hỏi
                                 <span> {index + 1}</span>
                             </div>
+
                             <QuizQuestion isInp={false} data={item} />
                         </div>
                     ))}

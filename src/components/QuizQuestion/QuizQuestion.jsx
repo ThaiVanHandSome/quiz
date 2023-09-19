@@ -13,6 +13,7 @@ const defaultFunc = () => {};
 function QuizQuestion({
     data = {},
     isInp = true,
+    isPlaying = false,
     quizName,
     indexQuestion = 0,
     isAdd,
@@ -21,6 +22,10 @@ function QuizQuestion({
     setChange = defaultFunc,
     isClear,
     setClear = defaultFunc,
+    setAnswer = defaultFunc,
+    answerChoosen = null,
+    currCorrectAnswer = null,
+    isCheck,
 }) {
     const quiz = useSelector((state) => state.quizReducer);
     const dispatch = useDispatch();
@@ -116,12 +121,18 @@ function QuizQuestion({
                     return (
                         <QuizOption
                             data={!isInp && data.options[index]}
+                            index={index}
                             bgColor={bgColor}
                             isInp={isInp}
+                            isPlaying={isPlaying}
                             value={valOption}
                             setValueOption={funcSetOptions[index]}
-                            isCorrectOption={index === correctOption}
+                            isCorrectOption={index === correctOption || (data && index === data.correctOption)}
                             handleSetCorrectOption={() => setCorrectOption(index)}
+                            setAnswer={setAnswer}
+                            answerChoosen={answerChoosen}
+                            currCorrectAnswer={currCorrectAnswer}
+                            isCheck={isCheck}
                         />
                     );
                 })}
