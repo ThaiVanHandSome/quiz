@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './QuizQuestion.module.scss';
 
 import QuizOption from './QuizOption';
+import checkData from './checkData';
 
 const cx = classNames.bind(styles);
 
@@ -23,9 +24,14 @@ function QuizQuestion({
     isClear,
     setClear = defaultFunc,
     setAnswer = defaultFunc,
+    setDataSuccessful = defaultFunc,
+    setStartCheckData = defaultFunc,
+    startCheckData,
     answerChoosen = null,
     currCorrectAnswer = null,
     isCheck,
+    dataSuccessful,
+    setCurrQuestion,
 }) {
     const quiz = useSelector((state) => state.quizReducer);
     const dispatch = useDispatch();
@@ -97,11 +103,28 @@ function QuizQuestion({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [indexQuestion]);
 
+    useEffect(() => {
+        if (!startCheckData) return;
+        if (question && optionA && optionB && optionC && optionD && correctOption) {
+            if (dataSuccessful === null) {
+                setAdd(true);
+                setCurrQuestion((prev) => prev + 1);
+            }
+            setDataSuccessful(true);
+        } else {
+            setDataSuccessful(false);
+        }
+    });
+
     const funcSetOptions = [setOptionA, setOptionB, setOptionC, setOptionD];
     const valueOptions = [optionA, optionB, optionC, optionD];
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('question')}>
+            <div
+                className={cx('question', {
+                    error: startCheckData && question === '',
+                })}
+            >
                 {!isInp && <div className={cx('question-label')}>{data.question}</div>}
                 {isInp && (
                     <textarea
@@ -110,7 +133,9 @@ function QuizQuestion({
                         rows="2"
                         cols="50"
                         placeholder="Your Question..."
-                        onChange={(e) => setQuestion(e.target.value)}
+                        onChange={(e) => {
+                            setQuestion(e.target.value);
+                        }}
                     />
                 )}
             </div>
@@ -120,6 +145,8 @@ function QuizQuestion({
                     if (!isInp) valOption = data.options[index];
                     return (
                         <QuizOption
+                            setDataSuccessful={setDataSuccessful}
+                            startCheckData={startCheckData}
                             data={!isInp && data.options[index]}
                             index={index}
                             bgColor={bgColor}
@@ -128,11 +155,12 @@ function QuizQuestion({
                             value={valOption}
                             setValueOption={funcSetOptions[index]}
                             isCorrectOption={index === correctOption || (data && index === data.correctOption)}
-                            handleSetCorrectOption={() => setCorrectOption(index)}
+                            handleSetCorrectOption={setCorrectOption}
                             setAnswer={setAnswer}
                             answerChoosen={answerChoosen}
                             currCorrectAnswer={currCorrectAnswer}
                             isCheck={isCheck}
+                            correctOptionInp={correctOption}
                         />
                     );
                 })}

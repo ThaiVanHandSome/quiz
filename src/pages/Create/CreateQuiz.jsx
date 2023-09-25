@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Create.module.scss';
 import Dialog from '~/components/Dialog';
@@ -16,10 +16,16 @@ function CreateQuiz({ quizName }) {
     const [change, setChange] = useState(false);
     const [clear, setClear] = useState(false);
     const [currQuestion, setCurrQuestion] = useState(1);
+    const [dataSuccessful, setDataSuccessful] = useState(null);
+    const [startCheckData, setStartCheckData] = useState(false);
 
     const handleAdd = () => {
-        setAdd(true);
-        setCurrQuestion(currQuestion + 1);
+        if (!startCheckData) setStartCheckData(true);
+        else if (dataSuccessful) {
+            setAdd(true);
+            setCurrQuestion(currQuestion + 1);
+            setStartCheckData(false);
+        }
     };
 
     const handleShowQuestion = (index) => {
@@ -32,6 +38,7 @@ function CreateQuiz({ quizName }) {
         setQuestionShow(0);
         setCurrQuestion(!quiz[quizName] ? 1 : quiz[quizName].length + 1);
     };
+
     return (
         <div className={cx('create-quiz-container')}>
             {openDialog && <Dialog isOpen={openDialog} setOpen={setOpenDialog} message="Bạn đã thay đổi thành công" />}
@@ -41,6 +48,9 @@ function CreateQuiz({ quizName }) {
                     <span> {currQuestion}</span>
                 </div>
                 <QuizQuestion
+                    startCheckData={startCheckData}
+                    setDataSuccessful={setDataSuccessful}
+                    setStartCheckData={setStartCheckData}
                     isAdd={add}
                     setAdd={setAdd}
                     quizName={quizName}
@@ -49,6 +59,8 @@ function CreateQuiz({ quizName }) {
                     isClear={clear}
                     setClear={setClear}
                     indexQuestion={questionShow}
+                    dataSuccessful={dataSuccessful}
+                    setCurrQuestion={setCurrQuestion}
                 />
             </div>
             <div className={cx('container-right')}>
@@ -60,7 +72,7 @@ function CreateQuiz({ quizName }) {
                                 <div
                                     key={index}
                                     className={cx('cnt-question-item', {
-                                        "question-active": questionShow === index + 1,
+                                        'question-active': questionShow === index + 1,
                                     })}
                                     onClick={() => handleShowQuestion(index + 1)}
                                 >

@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 
 const cx = classNames.bind(styles);
 
-function QuizQuestionView({ data, quizName, setPlaying }) {
+function QuizQuestionView({ data, quizName, setReady }) {
     const ref = useRef(null);
     useEffect(() => {
         ref.current.scrollIntoView(true);
@@ -19,7 +19,7 @@ function QuizQuestionView({ data, quizName, setPlaying }) {
                     Quiz:
                     <span> {quizName}</span>
                 </div>
-                <Button color="warning" className={cx('play-btn')} onClick={() => setPlaying(true)}>
+                <Button color="warning" className={cx('play-btn')} onClick={() => setReady(true)}>
                     Play
                 </Button>
                 <div className={cx('cnt-question')}>
